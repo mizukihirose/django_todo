@@ -1,0 +1,14 @@
+<form action="{% url 'todo:modify_db' %}" method="POST">
+{% csrf_token %}
+  <label for="text">What to do?:</label>
+  <input type="text" id="text" name="text">
+  <label for="due">Due date:</label>
+  <input type="date" id="due" name="due">
+  <label for="importance">How important?:</label>
+  <select name="importance" id="importance">
+    <option value="0" selected>0</option>
+    <option value="1">1</option>
+    <option value="2">2</option>
+  </select>
+  <input type="submit" value="Add">
+</form>
