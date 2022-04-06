@@ -21,5 +21,12 @@ def add_todo(request):
   return render(request, 'todo/add_todo.html')
 
 def modify_db(request):
-  todo = Todo.objects.create(todo_text=request.POST["text"], due_date=request.POST["due"], importance=request.POST["importance"])
+  # due = request.POST["due"] if request.POST["due"] else None
+  if request.POST["db_action"] == "add":
+    if request.POST["due"]:
+      Todo.objects.create(todo_text=request.POST["text"], due_date=request.POST["due"], importance=request.POST["importance"])
+    else:
+      Todo.objects.create(todo_text=request.POST["text"], importance=request.POST["importance"])
+  elif request.POST["db_action"] == "delete":
+    Todo.objects.filter(pk=request.POST["todo_id"]).delete()
   return HttpResponseRedirect(reverse('todo:index'))

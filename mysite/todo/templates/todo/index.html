@@ -1,7 +1,15 @@
 {% if todos_list %}
   <ul>
     {% for todo in todos_list %}
-      <li><a href="{% url 'todo:detail' todo.id %}">{{ todo.todo_text }}</a></li>
+      <li>
+        <form action="{% url 'todo:modify_db' %}" method="POST">
+          {% csrf_token %}
+          <a href="{% url 'todo:detail' todo.id %}">{{ todo.todo_text }}</a>
+          <input type="hidden" name="todo_id" value="{{ todo.id }}">
+          <input type="hidden" name="db_action" value="delete">
+          <input type="submit" value="Done">
+        </form>
+      </li>
     {% endfor %}
   </ul>
 {% else %}

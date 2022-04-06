@@ -9,7 +9,7 @@ class Todo(models.Model):
   todo_text = models.CharField(max_length=200)
   is_done = models.BooleanField(default=False)
   pub_date = models.DateTimeField('date published', default=datetime.now)
-  due_date = models.DateField('due date')
+  due_date = models.DateField('due date', null=True)
   importance = models.IntegerField(default=0, validators=[MinValueValidator(0), MaxValueValidator(2)])
 
   def __str__(self):
