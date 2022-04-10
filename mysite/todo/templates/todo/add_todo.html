@@ -1,3 +1,6 @@
+{% extends 'todo/base.html' %}
+
+{% block content %}
 <form action="{% url 'todo:modify_db' %}" method="POST">
 {% csrf_token %}
   <label for="text">What to do?:</label>
@@ -13,3 +16,4 @@
   <input type="hidden" name="db_action" value="add">
   <input type="submit" value="Add">
 </form>
+{% endblock %}

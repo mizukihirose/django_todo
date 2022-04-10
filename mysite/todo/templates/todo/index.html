@@ -1,10 +1,15 @@
+{% extends 'todo/base.html' %}
+{% block content %}
 {% if todo_list %}
-  <ul>
+  <ul class="list-group list-group-flush">
     {% for todo in todo_list %}
-      <li>
+      <li class="list-group-item">
         <form action="{% url 'todo:modify_db' %}" method="POST">
           {% csrf_token %}
-          <input type="submit" value="Done">
+          {% comment %} <input type="submit" value="Done"><i class="bi bi-check-square"></i> {% endcomment %}
+          <button type="submit" class="btn bg-transparent btn-outline-dark">
+            <i class="bi bi-check"></i>
+          </button>
           <a href="{% url 'todo:detail' todo.id %}">{{ todo.todo_text }}</a>
           <input type="hidden" name="todo_id" value="{{ todo.id }}">
           <input type="hidden" name="db_action" value="delete">
@@ -15,4 +20,5 @@
 {% else %}
   <p>No todos are available.</p>
 {% endif %}
-<a href="{% url "todo:add" %}">Add ToDo</a>
+<a href="{% url "todo:add" %}" class="btn btn-outline-dark">Add ToDo</a>
+{% endblock %}

@@ -1,3 +1,9 @@
+{% extends 'todo/base.html' %}
+{% load static %}
+
+{% block content %}
 <h1>{{ todo.todo_text }}</h1>
 <h3>Due Date: <u>{{ todo.due_date }}</u></h3>
 <p>Importance: {{ todo.importance }}<p>
+<a href="{% url 'todo:index' %}">Home</a>
+{% endblock %}
